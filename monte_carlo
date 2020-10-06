@@ -1,0 +1,29 @@
+
+In [2]:
+import random
+
+In [14]:
+def play_game():
+    mark = random.uniform(0,1)
+    alice_wins = 0
+    bob_wins = 0
+    did_alice_have_53_lead = False
+    while alice_wins < 6 and bob_wins < 6:
+        new_ball = random.uniform(0,1)
+        if new_ball > mark:
+            alice_wins += 1
+        elif new_ball < mark:
+            bob_wins += 1
+        if alice_wins == 5 and bob_wins == 3:
+            did_alice_have_53_lead = True
+    if did_alice_have_53_lead:
+        return  bob_wins == 6
+
+In [16]:
+outcomes = [play_game() for _ in range(1000000)]
+meaningful_outcomes = [x for x in outcomes if x is not None]
+sum(meaningful_outcomes)/len(meaningful_outcomes)
+
+Out [16]:
+0.09030121460412568
+
